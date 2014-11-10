@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="page-header">
+        <h1>List embedded items</h1>
+    </div>
+
+    <button class="btn btn-primary" ng-click="isCodeCollapsed = !isCodeCollapsed">Show me the code</button>
+    <hr>
+    <div hljs="" collapse="!isCodeCollapsed">
+        'use strict';
+
+        var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource', 'ngRoute', 'spring-data-rest'])
+        .config(['$routeProvider',
+        function ($routeProvider) {
+        $routeProvider.
+        when('/', {
+        templateUrl: 'partials/main.html'
+        }).
+        when('/samples', {
+        templateUrl: 'partials/samples.html'
+        }).
+        when('/samples/list-embedded-items', {
+        templateUrl: 'partials/samples/list-embedded-items.html'
+        }).otherwise({
+        redirectTo: '/'
+        });
+        }])
+        .controller('NavigationController', function ($scope, $location) {
+        $scope.navigateTo = function ( path ) {
+        $location.path( path );
+        };
+        });
+    </div>
+
+    <hr>
+
+    <footer>
+        <p><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/LICENSE" target="_blank">&copy;
+            Guy Brand 2014 - Licensed under MIT</a></p>
+    </footer>
+</div>

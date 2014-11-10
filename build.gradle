@@ -7,12 +7,18 @@ buildscript {
     }
 }
 
-apply plugin: 'groovy'
+apply plugin: 'java'
 apply plugin: 'spring-boot'
 
 jar {
     baseName = 'angular-spring-data-rest-sample'
     version =  '0.1.0'
+
+    // add the generated grunt sources to the static folder such that Spring Boot
+    // exposes them correctly in the jar file
+    from("$buildDir/grunt/webapp") {
+        into "static"
+    }
 }
 
 repositories {

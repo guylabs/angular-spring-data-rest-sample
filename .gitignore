@@ -1,6 +1,7 @@
 node_modules
 bower_components
 npm-debug.log
+build
 .idea
 *.iml
 src/main/webapp/lib/bower

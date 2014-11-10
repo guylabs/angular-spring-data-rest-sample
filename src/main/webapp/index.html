@@ -1,11 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="spring-data-rest-sample">
+<!DOCTYPE html>
+<html lang="en" ng-app="spring-data-rest-sample">
 
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Angular Spring Data REST Sample</title>
 
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/tomorrow-night.min.css">
 
     <!-- build:css css/third-party.css -->
     <!-- bower:css -->
@@ -21,18 +25,62 @@
     <script src="lib/bower/angular/angular.js"></script>
     <script src="lib/bower/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="lib/bower/angular-resource/angular-resource.js"></script>
+    <script src="lib/bower/angular-route/angular-route.js"></script>
+    <script src="lib/bower/angular-highlightjs/angular-highlightjs.js"></script>
+    <script src="lib/bower/highlightjs/highlight.pack.js"></script>
     <script src="lib/bower/angular-spring-data-rest/dist/angular-spring-data-rest.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js script/all.js -->
-    <script src="js/app.js" type="ja"></script>
+    <script src="js/app.js"></script>
     <!-- endbuild -->
 </head>
 
-<body style="padding-top: 70px;">
+<body>
 
-Hello world.
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavigationController">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Angular Spring Data REST Sample</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/README.md" target="_blank">Documentation</a>
+                </li>
+                <li><a href="https://github.com/guylabs/angular-spring-data-rest/releases" target="_blank">Releases</a>
+                </li>
+                <li><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/RELEASENOTES.md"
+                       target="_blank">Release notes</a></li>
+                <li>
+                    <div class="btn-group navbar-btn" dropdown>
+                        <button type="button" class="btn btn-primary" ng-click="navigateTo('/samples')">Samples</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Samples</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/samples/list-embedded-items">List embedded items</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div ng-view></div>
 
 </body>
 </html>
