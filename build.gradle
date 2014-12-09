@@ -9,6 +9,9 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
+apply plugin:'application'
+
+mainClassName = "org.guylabs.angular.spring.data.rest.sample.Application"
 
 jar {
     baseName = 'angular-spring-data-rest-sample'

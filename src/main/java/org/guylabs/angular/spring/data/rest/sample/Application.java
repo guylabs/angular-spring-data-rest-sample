@@ -25,8 +25,10 @@ public class Application extends RepositoryRestMvcConfiguration {
         CategoryRepository repository = context.getBean(CategoryRepository.class);
 
         // save a couple of categories
-        repository.save(Category.withName("Category 1"));
-        repository.save(Category.withName("Category 2"));
+        Category firstCategory = repository.save(Category.from("Parent Category 1", null));
+        repository.save(Category.from("Child Category 1", firstCategory));
+        repository.save(Category.from("Child Category 2", firstCategory));
+        repository.save(Category.from("Parent Category 2", null));
     }
 
     @Override

@@ -1,38 +1,28 @@
-<div class="container">
+<div class="container" ng-controller="SamplesListEmbeddedItemsController">
     <div class="page-header">
         <h1>List embedded items</h1>
     </div>
 
+    <p class="lead">
+        This sample explains how to iterate over the embedded items of a response. The following list shows all
+        categories which are persisted in the back end.
+    </p>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="category in categories"><strong>{{category.name}}</strong><br/>
+            <small><a href="{{category._links.self.href}}"><code>{{category._links.self.href}}</code></a></small></li>
+    </ul>
+
     <button class="btn btn-primary" ng-click="isCodeCollapsed = !isCodeCollapsed">Show me the code</button>
+    <button class="btn btn-primary" ng-click="isResponseCollapsed = !isResponseCollapsed">Show me the response</button>
+    <button class="btn btn-primary" ng-click="isProcessedResponseCollapsed = !isProcessedResponseCollapsed">Show me the processed response</button>
     <hr>
-    <div hljs="" collapse="!isCodeCollapsed">
-        'use strict';
-
-        var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource', 'ngRoute', 'spring-data-rest'])
-        .config(['$routeProvider',
-        function ($routeProvider) {
-        $routeProvider.
-        when('/', {
-        templateUrl: 'partials/main.html'
-        }).
-        when('/samples', {
-        templateUrl: 'partials/samples.html'
-        }).
-        when('/samples/list-embedded-items', {
-        templateUrl: 'partials/samples/list-embedded-items.html'
-        }).otherwise({
-        redirectTo: '/'
-        });
-        }])
-        .controller('NavigationController', function ($scope, $location) {
-        $scope.navigateTo = function ( path ) {
-        $location.path( path );
-        };
-        });
-    </div>
-
-    <hr>
-
+    <div hljs collapse="!isCodeCollapsed">
+SpringDataRestAdapter.processWithPromise($http.get('/rest/categories')).then(function(processedResponse) {
+    $scope.categories = processedResponse._embeddedItems;
+});</div>
+    <div hljs source="processedResponse" collapse="!isProcessedResponseCollapsed"></div>
+    <div hljs source="response" collapse="!isResponseCollapsed"></div>
     <footer>
         <p><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/LICENSE" target="_blank">&copy;
             Guy Brand 2014 - Licensed under MIT</a></p>

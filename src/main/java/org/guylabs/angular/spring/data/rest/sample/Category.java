@@ -3,10 +3,7 @@ package org.guylabs.angular.spring.data.rest.sample;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Simple category entity.
@@ -20,16 +17,20 @@ public final class Category {
 
     String name;
 
+    @OneToOne
+    Category parent;
+
     private Category() {
     }
 
-    private Category(String name) {
+    private Category(String name, Category parent) {
         this.name = name;
+        this.parent = parent;
     }
 
-    public static Category withName(String name) {
+    public static Category from(String name, Category parent) {
         Assert.isTrue(!StringUtils.isEmpty(name), "The name must not be empty");
-        return new Category(name);
+        return new Category(name, parent);
     }
 
     public Long getId() {
@@ -40,4 +41,7 @@ public final class Category {
         return name;
     }
 
+    public Category getParent() {
+        return parent;
+    }
 }
