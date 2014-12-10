@@ -1,0 +1,36 @@
+<div class="container" ng-controller="SamplesAutomaticLinkFetchingController">
+    <div class="page-header">
+        <h1>Automatic link fetching</h1>
+    </div>
+
+    <p class="lead">
+        This sample explains how to automatically fetch links to other resources. For more information about
+        automatic fetching of link see
+        <a href="https://github.com/guylabs/angular-spring-data-rest#how-to-automatically-fetch-links" target="_blank">this documentation.</a>
+        The following list shows all categories with the name of its parent.
+    </p>
+
+    <p>
+        The view iterates over the categories, which have their parent already fetched, and gets the name of the parent with the following Angular expression: <code>category.parent.name</code>
+    </p>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="category in categories"><strong>{{category.name}}</strong> - (parent: {{category.parent.name || '-'}})<br/>
+            <small><a href="{{category._links.self.href}}"><code>{{category._links.self.href}}</code></a></small></li>
+    </ul>
+
+    <button class="btn btn-primary" ng-click="isCodeCollapsed = !isCodeCollapsed">Show me the code</button>
+    <button class="btn btn-primary" ng-click="isResponseCollapsed = !isResponseCollapsed">Show me the response</button>
+    <button class="btn btn-primary" ng-click="isProcessedResponseCollapsed = !isProcessedResponseCollapsed">Show me the processed response</button>
+    <hr>
+    <div hljs collapse="!isCodeCollapsed">
+SpringDataRestAdapter.processWithPromise($http.get('/rest/categories'), 'parent', true).then(function(processedResponse) {
+    $scope.categories = processedResponse._embeddedItems;
+});</div>
+    <div hljs source="processedResponse" collapse="!isProcessedResponseCollapsed"></div>
+    <div hljs source="response" collapse="!isResponseCollapsed"></div>
+    <footer>
+        <p><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/LICENSE" target="_blank">&copy;
+            Guy Brand 2014 - Licensed under MIT</a></p>
+    </footer>
+</div>

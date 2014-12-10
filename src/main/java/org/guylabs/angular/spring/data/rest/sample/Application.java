@@ -29,6 +29,10 @@ public class Application extends RepositoryRestMvcConfiguration {
         repository.save(Category.from("Child Category 1", firstCategory));
         repository.save(Category.from("Child Category 2", firstCategory));
         repository.save(Category.from("Parent Category 2", null));
+        repository.save(Category.from("Parent Category 3", null));
+        repository.save(Category.from("Child Category 3", firstCategory));
+        repository.save(Category.from("Child Category 4", firstCategory));
+        repository.save(Category.from("Child Category 5", firstCategory));
     }
 
     @Override
