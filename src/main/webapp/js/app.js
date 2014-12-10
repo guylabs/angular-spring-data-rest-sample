@@ -13,6 +13,8 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
                 templateUrl: 'partials/samples/the-resources-method.html'
             }).when('/samples/automatic-link-fetching', {
                 templateUrl: 'partials/samples/automatic-link-fetching.html'
+            }).when('/samples/add-query-string-parameters', {
+                templateUrl: 'partials/samples/add-query-string-parameters.html'
             }).otherwise({
                 redirectTo: '/'
             });
@@ -55,5 +57,26 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
 
             var parentCategoryResource = processedResponse._embeddedItems[1]._resources("parent");
             $scope.parentCategory = parentCategoryResource.get();
+        });
+    })
+    .controller('AddUrlParametersController', function ($scope, $http, SpringDataRestAdapter) {
+        var httpPromise = $http.get('/rest').success(function (response) {
+            $scope.response = angular.toJson(response, true);
+        });
+
+        SpringDataRestAdapter.processWithPromise(httpPromise).then(function (processedResponse) {
+            $scope.processedResponse = angular.toJson(processedResponse, true);
+
+            var categoriesResourceObject = {
+                "name": "categories",
+                "parameters": {
+                    "size": 3
+                }
+            };
+
+            processedResponse._resources(categoriesResourceObject).get(function(response) {
+                $scope.categories = SpringDataRestAdapter.process(response)._embeddedItems;
+            });
+
         });
     });

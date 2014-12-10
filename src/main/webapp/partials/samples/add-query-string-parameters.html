@@ -1,0 +1,39 @@
+<div class="container" ng-controller="AddUrlParametersController">
+    <div class="page-header">
+        <h1>Add query string parameters</h1>
+    </div>
+
+    <p class="lead">
+        This sample explains how to add query string parameters to the <code>_resources</code> method. The following list shows
+        just three categories because we limit the size of the returned categories.
+    </p>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="category in categories"><strong>{{category.name}}</strong><br/>
+            <small><a href="{{category._links.self.href}}"><code>{{category._links.self.href}}</code></a></small></li>
+    </ul>
+
+    <button class="btn btn-primary" ng-click="isCodeCollapsed = !isCodeCollapsed">Show me the code</button>
+    <button class="btn btn-primary" ng-click="isResponseCollapsed = !isResponseCollapsed">Show me the response</button>
+    <button class="btn btn-primary" ng-click="isProcessedResponseCollapsed = !isProcessedResponseCollapsed">Show me the processed response</button>
+    <hr>
+    <div hljs collapse="!isCodeCollapsed">
+SpringDataRestAdapter.processWithPromise($http.get('/rest')).then(function (processedResponse) {
+    var categoriesResourceObject = {
+        "name": "categories",
+        "parameters": {
+            "size": 3
+        }
+    };
+
+    processedResponse._resources(categoriesResourceObject).get(function(response) {
+        $scope.categories = SpringDataRestAdapter.process(response)._embeddedItems;
+    });
+});</div>
+    <div hljs source="processedResponse" collapse="!isProcessedResponseCollapsed"></div>
+    <div hljs source="response" collapse="!isResponseCollapsed"></div>
+    <footer>
+        <p><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/LICENSE" target="_blank">&copy;
+            Guy Brand 2014 - Licensed under MIT</a></p>
+    </footer>
+</div>
