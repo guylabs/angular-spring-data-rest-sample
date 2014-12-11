@@ -32,6 +32,6 @@
     "angular-resource": "~1.3.0",
     "angular-route": "~1.3.0",
     "angular-highlightjs": "~0.3.2",
-    "angular-spring-data-rest": "0.3.0"
+    "angular-spring-data-rest": "0.3.1"
   }
 }
