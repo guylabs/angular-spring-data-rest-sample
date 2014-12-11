@@ -1,36 +1,26 @@
-<div class="container" ng-controller="TheResourcesMethodController">
+<div class="container" ng-controller="ShowAvailableResourcesController">
     <div class="page-header">
-        <h1>The <code>_resources</code> method</h1>
+        <h1>Show available resources</h1>
     </div>
 
     <p class="lead">
-        This sample explains how to use the <code>_resources</code> method in its simplest way. For more information about
-        the <code>_resources</code> method see
-        <a href="https://github.com/guylabs/angular-spring-data-rest#usage-of-_resources-method" target="_blank">this documentation.</a>
-        The following list shows the parent category of the second category.
-    </p>
-
-    <p>
-        This sample just shows one way of using the resources method. The <code>_resources</code> method has more features like
-        adding URL parameters to the requests, or return the available resources. And you are also able to use all the
-        features of the returned Angular <code>$resource</code> object.
+        This sample explains how to get an object with all available resources on the root of the back end REST endpoint
+        or on any other available resource.
     </p>
 
     <ul class="list-group">
-        <li class="list-group-item"><strong>{{parentCategory.name}}</strong><br/>
-            <small><a href="{{parentCategory._links.self.href}}"><code>{{parentCategory._links.self.href}}</code></a></small></li>
+        <li class="list-group-item"><strong>Available resources: {{availableResources.parameters}}</strong><br/>
+            <div hljs source="availableResources"></div></li>
     </ul>
 
     <button class="btn btn-primary" ng-click="isCodeCollapsed = !isCodeCollapsed">Show me the code</button>
     <button class="btn btn-primary" ng-click="isResponseCollapsed = !isResponseCollapsed">Show me the response</button>
-    <button class="btn btn-primary" ng-click="isProcessedResponseCollapsed = !isProcessedResponseCollapsed">Show me the processed response</button>
     <hr>
     <div hljs collapse="!isCodeCollapsed">
-SpringDataRestAdapter.processWithPromise($http.get('/rest/categories')).then(function (processedResponse) {
-    var parentCategoryResource = processedResponse._embeddedItems[1]._resources("parent");
-    $scope.parentCategory = parentCategoryResource.get();
+SpringDataRestAdapter.processWithPromise($http.get('/rest')).then(function (processedResponse) {
+    $scope.processedResponse = angular.toJson(processedResponse, true);
+    $scope.availableResources = processedResponse._resources();
 });</div>
-    <div hljs source="processedResponse" collapse="!isProcessedResponseCollapsed"></div>
     <div hljs source="response" collapse="!isResponseCollapsed"></div>
     <footer>
         <p><a href="https://github.com/guylabs/angular-spring-data-rest/blob/master/LICENSE" target="_blank">&copy;
