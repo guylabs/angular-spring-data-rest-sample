@@ -3,6 +3,8 @@ angular-spring-data-rest-sample
 
 Spring Boot based sample project for the https://github.com/guylabs/angular-spring-data-rest Angular module. Feel free to adapt the sample and maybe create a pull request with your own sample. I would be happy about any contribution or any feedback.
 
+![Screenshot](https://raw.githubusercontent.com/guylabs/angular-spring-data-rest-sample/master/files/screenshot.png)
+
 ## How to start
 
 First you need to have [nodejs](http://nodejs.org/) and the node plugin [bower](http://bower.io/) installed to be able to run the sample. Next execute the following commands inside a terminal and then open up a browser and connect to [http://localhost:8080](http://localhost:8080). (check that no other application is running on port 8080)
