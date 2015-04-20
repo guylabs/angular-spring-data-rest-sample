@@ -34,7 +34,7 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
             $scope.response = angular.toJson(response, true);
         });
 
-        SpringDataRestAdapter.processWithPromise(httpPromise).then(function (processedResponse) {
+        SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.categories = processedResponse._embeddedItems;
             $scope.processedResponse = angular.toJson(processedResponse, true);
         });
@@ -44,7 +44,7 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
             $scope.response = angular.toJson(response, true);
         });
 
-        SpringDataRestAdapter.processWithPromise(httpPromise, 'parent', true).then(function (processedResponse) {
+        SpringDataRestAdapter.process(httpPromise, 'parent', true).then(function (processedResponse) {
             $scope.categories = processedResponse._embeddedItems;
             $scope.processedResponse = angular.toJson(processedResponse, true);
         });
@@ -54,7 +54,7 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
             $scope.response = angular.toJson(response, true);
         });
 
-        SpringDataRestAdapter.processWithPromise(httpPromise).then(function (processedResponse) {
+        SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.processedResponse = angular.toJson(processedResponse, true);
 
             var parentCategoryResource = processedResponse._embeddedItems[1]._resources("parent");
@@ -66,7 +66,7 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
             $scope.response = angular.toJson(response, true);
         });
 
-        SpringDataRestAdapter.processWithPromise(httpPromise).then(function (processedResponse) {
+        SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.processedResponse = angular.toJson(processedResponse, true);
 
             var categoriesResourceObject = {
@@ -76,8 +76,10 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
                 }
             };
 
-            processedResponse._resources(categoriesResourceObject).get(function(response) {
-                $scope.categories = SpringDataRestAdapter.process(response)._embeddedItems;
+            processedResponse._resources(categoriesResourceObject).get(function (response) {
+                SpringDataRestAdapter.process(response).then(function(processedCategories) {
+                    $scope.categories = processedCategories._embeddedItems;
+                });
             });
 
         });
@@ -87,7 +89,7 @@ var app = angular.module('spring-data-rest-sample', ['ui.bootstrap', 'ngResource
             $scope.response = angular.toJson(response, true);
         });
 
-        SpringDataRestAdapter.processWithPromise(httpPromise).then(function (processedResponse) {
+        SpringDataRestAdapter.process(httpPromise).then(function (processedResponse) {
             $scope.processedResponse = angular.toJson(processedResponse, true);
             $scope.availableResources = angular.toJson(processedResponse._resources(), true);
         });

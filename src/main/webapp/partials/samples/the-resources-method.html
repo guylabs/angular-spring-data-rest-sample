@@ -26,7 +26,7 @@
     <button class="btn btn-primary" ng-click="isProcessedResponseCollapsed = !isProcessedResponseCollapsed">Show me the processed response</button>
     <hr>
     <div hljs collapse="!isCodeCollapsed">
-SpringDataRestAdapter.processWithPromise($http.get('/rest/categories')).then(function (processedResponse) {
+SpringDataRestAdapter.process($http.get('/rest/categories')).then(function (processedResponse) {
     var parentCategoryResource = processedResponse._embeddedItems[1]._resources("parent");
     $scope.parentCategory = parentCategoryResource.get();
 });</div>

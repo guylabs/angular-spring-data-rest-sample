@@ -18,16 +18,17 @@
     <button class="btn btn-primary" ng-click="isProcessedResponseCollapsed = !isProcessedResponseCollapsed">Show me the processed response</button>
     <hr>
     <div hljs collapse="!isCodeCollapsed">
-SpringDataRestAdapter.processWithPromise($http.get('/rest')).then(function (processedResponse) {
+SpringDataRestAdapter.process($http.get('/rest')).then(function (processedResponse) {
     var categoriesResourceObject = {
         "name": "categories",
         "parameters": {
             "size": 3
         }
     };
-
-    processedResponse._resources(categoriesResourceObject).get(function(response) {
-        $scope.categories = SpringDataRestAdapter.process(response)._embeddedItems;
+    processedResponse._resources(categoriesResourceObject).get(function (response) {
+        SpringDataRestAdapter.process(response).then(function(processedCategories) {
+            $scope.categories = processedCategories._embeddedItems;
+        });
     });
 });</div>
     <div hljs source="processedResponse" collapse="!isProcessedResponseCollapsed"></div>
