@@ -6,10 +6,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 @Configuration
 @EnableJpaRepositories
 @EnableAutoConfiguration
-public class Application extends RepositoryRestMvcConfiguration {
+public class Application extends RepositoryRestConfigurerAdapter {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class);
@@ -46,12 +44,8 @@ public class Application extends RepositoryRestMvcConfiguration {
     }
 
     @Override
-    protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        try {
-            config.setBaseUri(new URI("/rest"));
-        } catch (URISyntaxException exception) {
-            throw new RuntimeException("Cannot set base uri on REST configuration", exception);
-        }
+    public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+            config.setBasePath("/rest");
     }
 
 }
